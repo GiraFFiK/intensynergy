@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IntenSynergy - Платформа выездных интенсивов с измеримым ростом</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #4a6bff;
+            --primary-dark: #3a56d4;
+            --secondary: #ff6b8b;
+            --nature: #2ecc71;
+            --nature-dark: #27ae60;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --success: #28a745;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #fff;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            display: inline-block;
+            position: relative;
+        }
+
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 4px;
+            background: var(--primary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(74, 107, 255, 0.2);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .btn-nature {
+            background-color: var(--nature);
+            color: white;
+        }
+
+        .btn-nature:hover {
+            background-color: var(--nature-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(46, 204, 113, 0.2);
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background-color: rgba(26, 26, 46, 0.9);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        header.scrolled {
+            padding: 5px 0;
+            background-color: rgba(26, 26, 46, 0.95);
+        }
+
+        .navbar {
+            display: flex;
+            /* justify-content: space-between; */
+            gap: 10px;
+            align-items: center;
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--nature);
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            align-items: center;
+            justify-content: space-between;
+            
+        }
+
+        .nav-links li {
+            margin-left: 50px;
+            max-width: 150px;
+            white-space: nowrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--nature);
+            left: 0;
+            bottom: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        .nav-links .btn-nature {
+            padding: 10px 22px;
+            font-weight: 600;
+            color: white;
+            background-color: var(--nature);
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .nav-links .btn-nature:hover {
+            background-color: var(--nature-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
+            color: white;
+        }
+
+        .nav-links .btn-nature:after {
+            display: none;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Hero Section - С ДОБАВЛЕННЫМ ИЗОБРАЖЕНИЕМ СПРАВА */
+        .hero {
+            background: linear-gradient(rgba(26, 26, 46, 0.7), rgba(26, 26, 46, 0.85)), url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');
+            background-size: cover;
+            background-position: center 30%;
+            color: white;
+            padding-top: 150px;
+            padding-bottom: 100px;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .hero-text {
+            flex: 1;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-text h1 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            color: white;
+            line-height: 1.2;
+        }
+
+        .hero-text h1 span {
+            color: var(--nature);
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+
+        .hero-tagline {
+            display: inline-block;
+            background-color: var(--nature);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            animation: fadeInRight 1s ease;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            border: 5px solid rgba(255, 255, 255, 0.15);
+            transform: perspective(1000px) rotateY(-5deg) rotateX(2deg);
+            transition: all 0.5s ease;
+        }
+
+        .hero-image img:hover {
+            transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Выездные интенсивы */
+        .intensives {
+            background-color: #fff;
+        }
+
+        .intensives-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .intensives-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .intensives-header p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .intensives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .intensive-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .intensive-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .intensive-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .intensive-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .intensive-card:hover .intensive-image img {
+            transform: scale(1.05);
+        }
+
+        .intensive-content {
+            padding: 25px;
+        }
+
+        .intensive-location {
+            display: flex;
+            align-items: center;
+            color: var(--nature);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .intensive-location i {
+            margin-right: 8px;
+        }
+
+        .intensive-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .intensive-details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .intensive-detail {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .intensive-detail i {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .intensive-detail span {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .intensive-cta {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        /* Features Section */
+        .features {
+            background-color: var(--light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: var(--primary);
+            z-index: -1;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        /* Как это работает */
+        .how-it-works {
+            background-color: #fff;
+        }
+
+        .process-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin-top: 50px;
+            position: relative;
+        }
+
+        .process-step {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .process-step:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .process-icon {
+            flex-shrink: 0;
+            width: 120px;
+            height: 120px;
+            background-color: var(--nature);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            box-shadow: 0 10px 20px rgba(46, 204, 113, 0.2);
+        }
+
+        .process-content {
+            flex: 1;
+        }
+
+        .process-content h3 {
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+
+        .process-content p {
+            font-size: 1.1rem;
+            color: var(--gray);
+        }
+
+        /* Преимущества выездных интенсивов */
+        .benefits {
+            background-color: var(--light);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .benefit-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .benefit-icon {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(74, 107, 255, 0.1);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 20px;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, var(--nature) 0%, var(--nature-dark) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta h2 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .cta .btn-primary {
+            background-color: white;
+            color: var(--nature);
+        }
+
+        .cta .btn-primary:hover {
+            background-color: var(--light-gray);
+        }
+
+        .cta .btn-secondary {
+            color: white;
+            border-color: white;
+        }
+
+        .cta .btn-secondary:hover {
+            background-color: white;
+            color: var(--nature);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .footer-logo span {
+            color: var(--nature);
+        }
+
+        .footer-column h3 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background-color: var(--primary);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #b0b7c3;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #b0b7c3;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            .process-step, .process-step:nth-child(even) {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .process-icon {
+                width: 100px;
+                height: 100px;
+                font-size: 2rem;
+            }
+            
+            .hero-image img {
+                max-width: 80%;
+                margin-top: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: rgba(26, 26, 46, 0.98);
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: all 0.3s ease;
+                z-index: 999;
+                backdrop-filter: blur(10px);
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .nav-links a {
+                display: inline-block;
+                padding: 10px 20px;
+            }
+            
+            .nav-links .btn-nature {
+                margin-top: 10px;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.3rem;
+            }
+            
+            .intensives-header h2 {
+                font-size: 2rem;
+            }
+            
+            .features-grid, .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta h2 {
+                font-size: 2rem;
+            }
+            
+            .hero-image img {
+                max-width: 90%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-buttons, .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 250px;
+                text-align: center;
+            }
+            
+            .hero {
+                min-height: 90vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header id="header">
+        <div class="container" style="max-width: 1350px;">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <i class="fas fa-mountain"></i>Inten<span>Synergy</span>
+                </a>
+                
+                <button class="mobile-menu-btn" id="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#intensives">Выездные интенсивы</a></li>
+                    <li><a href="#features">Возможности</a></li>
+                    <li><a href="#process">Как это работает</a></li>
+                    <li><a href="#benefits">Преимущества</a></li>
+                    <li><a href="#cta" class="btn btn-nature">Подобрать интенсив</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="hero-tagline">
+                        <i class="fas fa-map-marker-alt" style="margin-right: 5px;"></i> Выездные трансформационные практики
+                    </div>
+                    <h1>Выездные интенсивы <span>с измеримым результатом</span></h1>
+                    <p>IntenSynergy — первая платформа, которая объединяет организацию групповых выездных интенсивов с интегрированной системой цифровой диагностики личностного роста. Погружение в природу + технологичный трекинг прогресса.</p>
+                    <div class="hero-buttons">
+                        <a href="#intensives" class="btn btn-primary">Посмотреть интенсивы</a>
+                        <a href="#process" class="btn btn-secondary">Как это работает</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://7d9e88a8-f178-4098-bea5-48d960920605.selcdn.net/78f61f3a-61f7-4d35-ba6f-2b260836a648/" alt="Люди на выездном интенсиве в горах">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Выездные интенсивы -->
+    <section class="intensives" id="intensives">
+        <div class="container">
+            <div class="intensives-header">
+                <h2>Ближайшие выездные интенсивы</h2>
+                <p>Погрузитесь в трансформационный опыт в уникальных локациях России. Каждый интенсив сочетает природу, комьюнити и измеримый личностный рост.</p>
+            </div>
+            
+            <div class="intensives-grid">
+                <div class="intensive-card animate-on-scroll">
+                    <div class="intensive-image">
+                        <!-- Алтай - горы -->
+                        <img src="https://adventure-guide.ru/upload/resize_cache/iblock/f63/2o4r5b9cjngucvregpnnl48dkviv6yrr/740_999999_1/Gorniy-Altay.jpg" alt="Горный Алтай">
+                    </div>
+                    <div class="intensive-content">
+                        <div class="intensive-location">
+                            <i class="fas fa-mountain"></i> Горный Алтай
+                        </div>
+                        <h3>Лидерство в условиях неопределенности</h3>
+                        <p>5-дневный интенсив в горах Алтая для руководителей и предпринимателей. Работа с принятием решений, управление стрессом и развитие эмоционального интеллекта.</p>
+                        <div class="intensive-details">
+                            <div class="intensive-detail">
+                                <i class="far fa-calendar"></i>
+                                <span>5 дней</span>
+                            </div>
+                            <div class="intensive-detail">
+                                <i class="fas fa-users"></i>
+                                <span>12-15 человек</span>
+                            </div>
+                            <div class="intensive-detail">
+                                <i class="fas fa-chart-line"></i>
+                                <span>8 метрик роста</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="intensive-card animate-on-scroll">
+                    <div class="intensive-image">
+                        <!-- Байкал - озеро и горы -->
+                        <img src="https://sozvezdie-tour.ru/Images/articles_files/589/baikal_1082592_1280.jpg" alt="Озеро Байкал">
+                    </div>
+                    <div class="intensive-content">
+                        <div class="intensive-location">
+                            <i class="fas fa-water"></i> Озеро Байкал
+                        </div>
+                        <h3>Осознанность и баланс с природой</h3>
+                        <p>7-дневный ретрит на берегу Байкала для восстановления ресурса, развития осознанности и поиска внутреннего баланса. Медитации, практики mindfulness и групповая терапия.</p>
+                        <div class="intensive-details">
+                            <div class="intensive-detail">
+                                <i class="far fa-calendar"></i>
+                                <span>7 дней</span>
+                            </div>
+                            <div class="intensive-detail">
+                                <i class="fas fa-users"></i>
+                                <span>8-10 человек</span>
+                            </div>
+                            <div class="intensive-detail">
+                                <i class="fas fa-chart-line"></i>
+                                <span>6 метрик роста</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="intensive-card animate-on-scroll">
+                    <div class="intensive-image">
+                        <!-- Карелия - лес и озера -->
+                        <img src="https://opis-cdn.tinkoffjournal.ru/mercury/faq-karelia_shkhery.ghewoi5vimev.jpg" alt="Карелия">
+                    </div>
+                    <div class="intensive-content">
+                        <div class="intensive-location">
+                            <i class="fas fa-tree"></i> Карелия
+                        </div>
+                        <h3>Командообразование и коммуникация</h3>
+                        <p>4-дневный корпоративный интенсив в карельских лесах для команд и отделов. Упражнения на доверие, эффективную коммуникацию и совместное решение сложных задач.</p>
+                        <div class="intensive-details">
+                            <div class="intensive-detail">
+                                <i class="far fa-calendar"></i>
+                                <span>4 дня</span>
+                            </div>
+                            <div class="intensive-detail">
+                                <i class="fas fa-users"></i>
+                                <span>10-20 человек</span>
+                            </div>
+                            <div class="intensive-detail">
+                                <i class="fas fa-chart-line"></i>
+                                <span>7 метрик роста</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="intensive-cta animate-on-scroll">
+                <a href="#cta" class="btn btn-nature">Посмотреть все интенсивы</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Почему IntenSynergy</h2>
+                <p>Уникальное сочетание выездных практик и технологий измерения роста</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3>Уникальные локации</h3>
+                    <p>Выездные интенсивы в самых живописных местах России: Алтай, Байкал, Карелия, Кавказ. Природа как катализатор трансформации.</p>
+                </div>
+                
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>AI-трекинг прогресса</h3>
+                    <p>Цифровая диагностика до, во время и после интенсива. Искусственный интеллект анализирует динамику ваших soft skills.</p>
+                </div>
+                
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Комьюнити единомышленников</h3>
+                    <p>Групповые форматы от 8 до 20 человек с тщательным подбором участников по ценностям и запросам.</p>
+                </div>
+                
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Измеримые результаты</h3>
+                    <p>Конкретные метрики роста по 8+ параметрам: эмоциональный интеллект, стрессоустойчивость, коммуникация, лидерство.</p>
+                </div>
+                
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">
+                        <i class="fas fa-road"></i>
+                    </div>
+                    <h3>Постпрограммная интеграция</h3>
+                    <p>90 дней поддержки после интенсива для закрепления результатов и интеграции изменений в повседневную жизнь.</p>
+                </div>
+                
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Полное сопровождение</h3>
+                    <p>Организация "под ключ": трансфер, проживание, питание, программа. Вы сосредотачиваетесь на своем росте.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Как это работает -->
+    <section class="how-it-works" id="process">
+        <div class="container">
+            <div class="section-title">
+                <h2>Как проходит выездной интенсив</h2>
+                <p>От диагностики до интеграции результатов — полный цикл трансформации</p>
+            </div>
+            
+            <div class="process-container">
+                <div class="process-step animate-on-scroll">
+                    <div class="process-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="process-content">
+                        <h3>1. Диагностика и подбор</h3>
+                        <p>Проходите онлайн-диагностику своих soft skills. Наш AI-алгоритм анализирует ваши запросы и рекомендует подходящий выездной интенсив с учетом локации, темы и состава группы.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step animate-on-scroll">
+                    <div class="process-icon">
+                        <i class="fas fa-suitcase"></i>
+                    </div>
+                    <div class="process-content">
+                        <h3>2. Подготовка и выезд</h3>
+                        <p>Получаете персональный чек-лист подготовки. Мы организуем весь логистический процесс: трансфер до локации, размещение в комфортабельных условиях, питание.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step animate-on-scroll">
+                    <div class="process-icon">
+                        <i class="fas fa-mountain"></i>
+                    </div>
+                    <div class="process-content">
+                        <h3>3. Погружение и практика</h3>
+                        <p>5-7 дней интенсивной работы в уникальной природной локации. Групповые сессии, индивидуальные практики, коучинговые форматы и трекинг прогресса в реальном времени через мобильное приложение.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step animate-on-scroll">
+                    <div class="process-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <div class="process-content">
+                        <h3>4. Анализ и отчетность</h3>
+                        <p>По завершении интенсива получаете детальный отчет о своих результатах: динамика по ключевым метрикам, персонализированные рекомендации по дальнейшему развитию.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step animate-on-scroll">
+                    <div class="process-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="process-content">
+                        <h3>5. Интеграция в жизнь</h3>
+                        <p>90 дней постпрограммной поддержки: вебинары, челленджи, доступ к комьюнити выпускников. Помогаем перенести инсайты и навыки в вашу повседневную реальность.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Преимущества выездных интенсивов -->
+    <section class="benefits" id="benefits">
+        <div class="container">
+            <div class="section-title">
+                <h2>Почему именно выездные форматы</h2>
+                <p>Научно доказанная эффективность погружения в природу для личностной трансформации</p>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card animate-on-scroll">
+                    <div class="benefit-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Отрыв от рутины</h3>
+                    <p>Выезд из привычной среды позволяет "перезагрузить" мышление, выйти за рамки ежедневных паттернов поведения и увидеть новые перспективы.</p>
+                </div>
+                
+                <div class="benefit-card animate-on-scroll">
+                    <div class="benefit-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Снижение стресса</h3>
+                    <p>Пребывание на природе снижает уровень кортизола на 21%, что создает оптимальные условия для обучения и трансформации.</p>
+                </div>
+                
+                <div class="benefit-card animate-on-scroll">
+                    <div class="benefit-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Глубокие связи</h3>
+                    <p>Групповое погружение в удаленных локациях способствует созданию доверительной атмосферы и формированию сильного комьюнити.</p>
+                </div>
+                
+                <div class="benefit-card animate-on-scroll">
+                    <div class="benefit-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Повышенная вовлеченность</h3>
+                    <p>Участники выездных программ демонстрируют на 47% более высокий уровень вовлеченности по сравнению с городскими форматами.</p>
+                </div>
+                
+                <div class="benefit-card animate-on-scroll">
+                    <div class="benefit-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Долгосрочный эффект</h3>
+                    <p>Интеграция практик в естественную среду повышает вероятность сохранения новых привычек на 68% после возвращения к обычной жизни.</p>
+                </div>
+                
+                <div class="benefit-card animate-on-scroll">
+                    <div class="benefit-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3>Трансформационный опыт</h3>
+                    <p>Сочетание природной красоты, групповой динамики и профессионального сопровождения создает условия для прорывных изменений.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="cta">
+        <div class="container">
+            <h2 class="animate-on-scroll">Готовы к выездной трансформации?</h2>
+            <p class="animate-on-scroll">Выберите подходящий интенсив в уникальной локации России и начните путь к измеримому личностному росту уже на следующем выезде.</p>
+            
+            <div class="cta-buttons animate-on-scroll">
+                <a href="#" class="btn btn-primary">Подобрать интенсив</a>
+                <a href="#" class="btn btn-secondary">Получить консультацию</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <a href="#" class="footer-logo"><i class="fas fa-mountain"></i> Inten<span>Synergy</span></a>
+                    <p>Платформа выездных интенсивов с измеримым личностным ростом. Объединяем природу, комьюнити и технологии для вашей трансформации.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Локации интенсивов</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-mountain"></i> Алтай</a></li>
+                        <li><a href="#"><i class="fas fa-water"></i> Байкал</a></li>
+                        <li><a href="#"><i class="fas fa-tree"></i> Карелия</a></li>
+                        <li><a href="#"><i class="fas fa-snowflake"></i> Кавказ</a></li>
+                        <li><a href="#"><i class="fas fa-umbrella-beach"></i> Крым</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Направления</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Лидерство</a></li>
+                        <li><a href="#">Осознанность</a></li>
+                        <li><a href="#">Командообразование</a></li>
+                        <li><a href="#">Карьерная трансформация</a></li>
+                        <li><a href="#">Эмоциональный интеллект</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <ul class="footer-links">
+                        <li><a href="tel:+78001234567"><i class="fas fa-phone"></i> 8 (800) 123-45-67</a></li>
+                        <li><a href="mailto:info@intensynergy.ru"><i class="fas fa-envelope"></i> info@intensynergy.ru</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Москва, РЭУ им. Г.В. Плеханова</a></li>
+                        <li><a href="#">Для корпоративных клиентов</a></li>
+                        <li><a href="#">Для партнеров-организаторов</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2025 IntenSynergy. Все права защищены. Проект выполнен в рамках междисциплинарного проекта РЭУ им. Г.В. Плеханова.</p>
+                <p>Факультет "КАПИТАНЫ", Базовая кафедра "Инновационный менеджмент и социальное предпринимательство"</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Header scroll effect
+        const header = document.getElementById('header');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Animation on scroll
+        const animateElements = document.querySelectorAll('.animate-on-scroll');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        
+        animateElements.forEach(element => {
+            observer.observe(element);
+        });
+        
+        // Initial animations
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animate hero elements on page load
+            const heroText = document.querySelector('.hero-text');
+            const heroImage = document.querySelector('.hero-image');
+            
+            setTimeout(() => {
+                heroText.style.animation = 'fadeInUp 1s ease forwards';
+                heroImage.style.animation = 'fadeInRight 1s ease forwards';
+            }, 300);
+            
+            // Header scroll effect on page load
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
